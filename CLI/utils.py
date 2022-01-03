@@ -202,7 +202,8 @@ def predict(model=None, mode: str = None, image_path: str = None, size: int = 32
 
     image = cv2.imread(image_path, cv2.IMREAD_COLOR)
     h, w, _ = image.shape
-    image = cv2.resize(src=cv2.cvtColor(src=image, code=cv2.COLOR_BGR2RGB), dsize=(size, size), interpolation=cv2.INTER_AREA)
+    image = cv2.cvtColor(src=cv2.cvtColor(src=image, code=cv2.COLOR_BGR2GRAY), code=cv2.COLOR_GRAY2RGB)
+    image = cv2.resize(src=image, dsize=(size, size), interpolation=cv2.INTER_AREA)
 
     with torch.no_grad():
         if re.match(r"^full$", mode, re.IGNORECASE) or re.match(r"^semi$", mode, re.IGNORECASE):
@@ -215,3 +216,14 @@ def predict(model=None, mode: str = None, image_path: str = None, size: int = 32
     color_image = np.clip((color_image * 255), 0, 255).astype("uint8")
 
     return cv2.resize(src=color_image, dsize=(w, h), interpolation=cv2.INTER_AREA)
+
+
+def show(image: np.ndarray, title: bool = False) -> None:
+    plt.figure()
+    plt.imshow(image)
+    plt.axis("off")
+    if title:
+        plt.title(title)
+    figmanager = plt.get_current_fig_manager()
+    figmanager.window.state("zoomed")
+    plt.show()

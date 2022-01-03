@@ -1,6 +1,6 @@
 import sys
 
-from .utils import breaker, prepare_train_and_valid_dataloaders, fit, predict, save_graphs
+from .utils import breaker, prepare_train_and_valid_dataloaders, fit, predict, save_graphs, show
 from .models import get_model
 
 
@@ -107,11 +107,9 @@ def run():
     else:
         assert name is not None, "Enter an Image Name"
 
-        label = predict(model, mode, path + "/test/" + name, size)
+        image = predict(model, mode, path + "/test/" + name, size)
 
-        breaker()
-        print(f"Label : {label}")
-        breaker()
+        show(image)
 
     print("Terminating ...")
     breaker()
