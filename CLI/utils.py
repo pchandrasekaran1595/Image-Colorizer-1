@@ -211,7 +211,7 @@ def predict(model=None, mode: str = None, image_path: str = None, size: int = 32
         else:
             _, color_image = model(TRANSFORM_FINAL(image).to(DEVICE).unsqueeze(dim=0))
     
-    color_image = torch.sigmoid(color_image.squeeze())
+    color_image = color_image.squeeze()
     color_image = color_image.detach().cpu().numpy().transpose(1, 2, 0)
     color_image = np.clip((color_image * 255), 0, 255).astype("uint8")
 

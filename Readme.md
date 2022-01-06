@@ -2,6 +2,8 @@
 
 <br>
 
+- 3-Channel Gray Images to RGB
+
 - [Natural Images Dataset](https://www.kaggle.com/prasunroy/natural-images)
 
 - Run `np_make.py [args]` to convert entire dataset into a `np.uint8` array

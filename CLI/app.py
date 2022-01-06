@@ -110,6 +110,7 @@ def run():
         image = predict(model, mode, path + "/test/" + name, size)
 
         show(image)
+        breaker()
 
     print("Terminating ...")
     breaker()
